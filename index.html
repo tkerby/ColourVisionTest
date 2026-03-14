@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Colour JND Radar Test</title>
+    <meta name="theme-color" content="#101418" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header>
+        <h1>Colour JND Radar Test</h1>
+        <p class="subtle">Measure your just-noticeable colour difference around the hue wheel.</p>
+      </header>
+
+      <section id="prep" class="panel">
+        <h2>Before you start</h2>
+        <ul>
+          <li>Use <strong>daylight or bright neutral room lighting</strong>.</li>
+          <li>Set phone brightness to around <strong>80–100%</strong> for stable colour separation.</li>
+          <li>Turn <strong>Night Shift / True Tone / blue light filters</strong> off.</li>
+          <li>Disable auto-brightness for the test if possible.</li>
+        </ul>
+
+        <div class="calibration">
+          <h3>Quick display check</h3>
+          <p>If you can distinguish all boxes, your display setup is likely good enough.</p>
+          <div class="strip" id="grayStrip"></div>
+          <div class="contrast-row">
+            <div class="contrast-box c1"></div>
+            <div class="contrast-box c2"></div>
+            <div class="contrast-box c3"></div>
+          </div>
+        </div>
+
+        <button id="startBtn" class="primary">Start Test</button>
+      </section>
+
+      <section id="test" class="panel hidden">
+        <h2 id="progressTitle">Hue 1 / 24 · Trial 1</h2>
+        <p class="hint">Tap where you think the boundary line is. The divider moves each round and is never in the outer 10%.</p>
+
+        <div id="pairArea" class="pair" aria-label="Colour pair test area">
+          <div id="actualMarker" class="marker actual hidden"></div>
+          <div id="clickMarker" class="marker click hidden"></div>
+        </div>
+
+        <div class="actions">
+          <button id="cantTellBtn" class="secondary">No line / Can't tell</button>
+        </div>
+
+        <p id="timerText" class="subtle"></p>
+        <p id="feedbackText" class="subtle"></p>
+      </section>
+
+      <section id="results" class="panel hidden">
+        <h2>Your Colour JND Results</h2>
+        <p id="avgText"></p>
+        <canvas id="radar" width="320" height="320" aria-label="Radar diagram"></canvas>
+
+        <div class="result-actions">
+          <button id="saveBtn" class="primary">Save Result</button>
+          <button id="shareBtn" class="secondary">Create Share Link</button>
+          <button id="restartBtn" class="secondary">Retake Test</button>
+        </div>
+
+        <details>
+          <summary>Show per-hue thresholds</summary>
+          <ol id="perHueList"></ol>
+        </details>
+
+        <h3>Past local results</h3>
+        <ul id="history"></ul>
+
+        <h3>Friend challenge</h3>
+        <p class="subtle">Open a link with <code>?r=...</code> to compare shared scores.</p>
+        <pre id="sharedResult"></pre>
+      </section>
+    </main>
+
+    <script src="app.js" type="module"></script>
+  </body>
+</html>
